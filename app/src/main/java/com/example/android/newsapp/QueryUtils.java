@@ -26,15 +26,15 @@ public class QueryUtils {
      */
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
 
-
     private QueryUtils() {
 
     }
+
     /**
      * Query the dataset and return a list of {@link Technology} objects.
-     * */
+     */
     public static List<Technology> fetchArticleData(String requestUrl) {
-        Log.i(LOG_TAG,"Test:fetchArticleData() called");
+        Log.i(LOG_TAG, "Test:fetchArticleData() called");
         // Create URL object
         URL url = createUrl(requestUrl);
         // Perform HTTP request to the URL and receive a JSON response back
@@ -46,13 +46,12 @@ public class QueryUtils {
         }
         try {
             Thread.sleep(1000);
-        }catch(InterruptedException e){
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         return extractArticleFromJson(jsonResponse);
     }
-
 
     /**
      * Returns new URL object from the given string URL.
@@ -66,6 +65,7 @@ public class QueryUtils {
         }
         return url;
     }
+
     private static String formatDate(String date) {
         String guardianJsonDateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'";
         SimpleDateFormat jsonDateFormatter = new SimpleDateFormat(guardianJsonDateFormat, Locale.US);
@@ -79,6 +79,7 @@ public class QueryUtils {
             return "";
         }
     }
+
     /**
      * Make an HTTP request to the given URL and return a String as the response.
      */
@@ -101,7 +102,7 @@ public class QueryUtils {
             if (urlConnection.getResponseCode() == 200) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
-            }else{
+            } else {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
 
@@ -139,6 +140,7 @@ public class QueryUtils {
         }
         return output.toString();
     }
+
     /**
      * Return a list of {@link Technology} objects that has been built up from
      * parsing the given JSON response.
@@ -162,7 +164,7 @@ public class QueryUtils {
             // Extract the JSONArray associated with the key called "technology",
             // which represents a list of features (or technology).
             JSONArray articleArray = baseJsonResponse.getJSONObject("response").getJSONArray("results");
-            for(int i = 0; i < articleArray.length(); i++) {
+            for (int i = 0; i < articleArray.length(); i++) {
                 // Get a single article at position i within the list of articles
                 JSONObject results = articleArray.getJSONObject(i);
                 // Extract the value for the key called "sectionName"
@@ -170,26 +172,21 @@ public class QueryUtils {
                 // Extract the value for the key webTitle
                 String webTitle = results.getString("webTitle");
                 //Extract the url
-                String url = results.getString("webUrl");
-                JSONArray tags = results.getJSONArray("tags");
                 String author = "";
-                if(tags.length() !=0) {
-                    author = null;
-                }else{
-
-                    for (int j = 0; j < tags.length();j++){
-                        JSONObject firstObject = tags.getJSONObject(j);
-                        author += firstObject.get("firstName") + ("lastName");
-                    }
+                JSONArray tags = results.getJSONArray("tags");
+                if (tags.length() != 0) {
+                    JSONObject currentName = tags.getJSONObject(0);
+                    String name = currentName.getString("webTitle");
+                    author = name;
+                } else {
                     author = "";
+
                 }
                 String date = results.getString("webPublicationDate");
                 date = formatDate(date);
-                //Format time
-
+                String url = results.getString("webUrl");
                 Technology article = new Technology(url, section, webTitle, date, author);
                 articles.add(article);
-
             }
 
         } catch (JSONException e) {
@@ -198,10 +195,9 @@ public class QueryUtils {
             // with the message from the exception.
             Log.e("QueryUtils", "Problem parsing the article JSON results", e);
         }
-
         // Return the list of articles
         return articles;
     }
 
-            }
+}
 

@@ -5,8 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import java.util.List;
 
-public class NewsInfoLoader  extends AsyncTaskLoader<List<Technology>> {
-
+public class NewsInfoLoader extends AsyncTaskLoader<List<Technology>> {
     /**
      * Tag for log messages
      */
@@ -21,7 +20,7 @@ public class NewsInfoLoader  extends AsyncTaskLoader<List<Technology>> {
      * Constructs a new {@link NewsInfoLoader}.
      *
      * @param context of the activity
-     * @param url     to load data from
+     * @param url to load data from
      */
     public NewsInfoLoader(Context context, String url) {
         super(context);

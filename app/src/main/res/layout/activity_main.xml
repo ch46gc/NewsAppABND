@@ -7,12 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
     <!-- Layout for a list of news articles-->
-   <ListView
-       android:id="@+id/list"
+    <ListView
+        android:id="@+id/list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:dividerHeight="0dp"/>
+        android:dividerHeight="@dimen/divider_height"/>
     <!-- Empty view is only visible when the list has no items. -->
     <TextView
         android:id="@+id/empty_view"

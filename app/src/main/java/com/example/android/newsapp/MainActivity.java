@@ -17,14 +17,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class MainActivity extends AppCompatActivity  implements LoaderManager.LoaderCallbacks<List<Technology>> {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Technology>> {
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?" +
-            "from-date=2018-06-06&q=technology%20&api-key=test&show-tags=contributor" ;
+            "from-date=2018-06-06&q=technology%20&api-key=test&show-tags=contributor";
     private static final int GUARDIAN_LOADER_ID = 1;
     private NewsInfoAdapter mAdapter;
-    /** TextView that is displayed when the list is empty */
+    /**
+     * TextView that is displayed when the list is empty
+     */
     private TextView mEmptyStateTextView;
 
     @Override
@@ -33,15 +34,15 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
         setContentView(R.layout.activity_main);
         ListView technologyListView = findViewById(R.id.list);
         // Create a new adapter that takes an empty list of technology as input
-       mAdapter = new NewsInfoAdapter(this, new ArrayList<Technology>());
+        mAdapter = new NewsInfoAdapter(this, new ArrayList<Technology>());
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
-       technologyListView.setAdapter(mAdapter);
+        technologyListView.setAdapter(mAdapter);
         mEmptyStateTextView = findViewById(R.id.empty_view);
         technologyListView.setEmptyView(mEmptyStateTextView);
         // Set an item click listener on the ListView, which sends an intent to a web browser
         // to open a website with more information about the selected technology.
-       technologyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        technologyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 // Find the current article that was clicked on
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
 
 
                 // Create a new intent to view the article URI
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW,  Uri.parse(currentTechnology.getUrl()));
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(currentTechnology.getUrl()));
 
                 // Send the intent to launch a new activity
                 startActivity(websiteIntent);
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
-            Log.i(LOG_TAG,"Test:calling initLoader()");
+            Log.i(LOG_TAG, "Test:calling initLoader()");
             loaderManager.initLoader(GUARDIAN_LOADER_ID, null, this);
         } else {
             // Otherwise, display error
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
 
     @Override
     public Loader<List<Technology>> onCreateLoader(int id, Bundle args) {
-        Log.i(LOG_TAG,"Test: onCreateLoader()called");
+        Log.i(LOG_TAG, "Test: onCreateLoader()called");
         // Create a new loader for the given URL
         return new NewsInfoLoader(this, GUARDIAN_REQUEST_URL);
     }
@@ -109,9 +110,10 @@ public class MainActivity extends AppCompatActivity  implements LoaderManager.Lo
             mEmptyStateTextView.setTextSize(24);
         }
     }
+
     @Override
     public void onLoaderReset(Loader<List<Technology>> loader) {
-        Log.i(LOG_TAG,"Test: onLoaderReset()called");
+        Log.i(LOG_TAG, "Test: onLoaderReset()called");
         // Loader reset, so we can clear out our existing data.
         mAdapter.clear();
 
