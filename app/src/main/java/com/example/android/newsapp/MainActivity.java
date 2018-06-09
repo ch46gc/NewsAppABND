@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
      */
     private TextView mEmptyStateTextView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mEmptyStateTextView.setText(R.string.no_technology);
             mEmptyStateTextView.setPadding(16, 16, 16, 16);
             mEmptyStateTextView.setTextSize(24);
+        } else {
+            mEmptyStateTextView.setText(getString(R.string.no_technology_news_found));
         }
     }
 

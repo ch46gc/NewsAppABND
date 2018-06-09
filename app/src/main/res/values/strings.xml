@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">NewsApp</string>
-    <string name="no_internet_connection">No internet connection.</string>
+    <string name="no_internet_connection">No internet connection. \n Kindly check your internet connection.</string>
     <string name="no_technology">No technology articles found.</string>
     <string name="date">Jun 6, 2018</string>
     <string name="title">Title</string>
     <string name="section" />
+    <string name="no_technology_news_found">There were no technology news stories found.</string>
 </resources>

@@ -5,9 +5,8 @@
     <!-- Primary dark color of the app (shown in the status bar) -->
     <color name="colorPrimaryDark">#23303D</color>
     <!-- Accent color of the app -->
-    <color name="colorAccent">#b0eded</color>
+    <color name="colorAccent">#B4BAC0</color>
     <color name="text_color">#000000</color>
-    <color name="textColorArticleDetails">#B4BAC0</color>
     <!-- Text color for section name-->
     <color name="background_color">#d9dee1</color>
 </resources>
