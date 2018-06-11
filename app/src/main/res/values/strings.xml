@@ -5,5 +5,42 @@
     <string name="date">Jun 6, 2018</string>
     <string name="title">Title</string>
     <string name="section" />
-    <string name="no_technology_news_found">There were no technology news stories found.</string>
+    <string name="no_technology_news_found">There were no news stories found.</string>
+    <string name="setting_menu_item">Settings</string>
+    <string name="setting_title">News Setting</string>
+    <!-- Preferences for sections-->
+    <string name="settings_top_stories_label">Top Stories</string>
+    <string name="settings_top_stories_key" translatable="false">top stories</string>
+    <string name="settings_top_stories_default" translatable="false">technology</string>
+    <!-- Label for culture news [CHAR LIMIT=20] -->
+    <string name="settings_culture_label">Culture</string>
+    <string name="settings_culture_value" translatable="false">culture</string>
+    <!-- Label for education news [CHAR LIMIT=20] -->
+    <string name="settings_education_label">Education</string>
+    <string name="settings_education_value" translatable="false">education</string>
+    <!-- Label for environment news [CHAR LIMIT=20] -->
+    <string name="settings_environment_label">Environment</string>
+    <string name="settings_environment_value" translatable="false">environment</string>
+    <!-- Label for music news [CHAR LIMIT=20] -->
+    <string name="settings_music_label">Music</string>
+    <string name="settings_music_value" translatable="false">music</string>
+    <!-- Label for sport news [CHAR LIMIT=20] -->
+    <string name="settings_sport_label">Sport</string>
+    <string name="settings_sport_value" translatable="false">sport</string>
+    <!--Label for technology news [ CHAR LIMIT = 20] -->
+    <string name="settings_technology_label">Technology</string>
+    <string name="settings_technology_value" translatable="false">technology</string>
+    <!-- Label for travel news [CHAR LIMIT=20] -->
+    <string name="settings_travel_label">Travel</string>
+    <string name="settings_travel_value" translatable="false">travel</string>
+    <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
+    <string name="settings_order_by_label">Order By</string>
+    <string name="settings_order_by_key" translatable="false">order_by</string>
+    <string name="settings_order_by_default" translatable="false">most recent</string>
+    <!-- Label for  recent  news [CHAR LIMIT=20] -->
+    <string name="settings_order_by_newest_label">Most Recent</string>
+    <string name="settings_order_by_newest_value" translatable="false">most recent</string>
+    <!-- Label for the past news [CHAR LIMIT=20] -->
+    <string name="settings_order_by_oldest_label">Past</string>
+    <string name="settings_order_by_oldest_value" translatable="false">past</string>
 </resources>

@@ -4,23 +4,28 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Technology>> {
     private static final String LOG_TAG = MainActivity.class.getName();
-    private static final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?" +
-            "from-date=2018-06-06&q=technology%20&api-key=test&show-tags=contributor";
+    private static final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?";
+
     private static final int GUARDIAN_LOADER_ID = 1;
     private NewsInfoAdapter mAdapter;
     /**
@@ -87,11 +92,28 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
     }
 
+    //onCreateLoader returns a new loader for the given Id.
     @Override
-    public Loader<List<Technology>> onCreateLoader(int id, Bundle args) {
+    public Loader<List<Technology>> onCreateLoader(int i, Bundle bundle
+
+    ) {
         Log.i(LOG_TAG, "Test: onCreateLoader()called");
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String sectionSelection = sharedPreferences.getString(
+                getString(R.string.settings_top_stories_key),
+                getString(R.string.settings_top_stories_default));
+        String orderBy = sharedPreferences.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default));
+
+        Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
+        uriBuilder.appendQueryParameter("section", sectionSelection);
+        uriBuilder.appendQueryParameter("order by", orderBy);
+        uriBuilder.appendQueryParameter("api-key", "test");
         // Create a new loader for the given URL
-        return new NewsInfoLoader(this, GUARDIAN_REQUEST_URL);
+        return new NewsInfoLoader(this, uriBuilder.toString());
     }
 
     @Override
@@ -122,6 +144,24 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
+    @Override
+    //This method will initialize the contents of the Activity  menu.
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Inflates the Options Menu specified in the xml.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_setting) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
 
 
