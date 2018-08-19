@@ -25,6 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Technology>> {
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final String GUARDIAN_REQUEST_URL = "https://content.guardianapis.com/search?";
+    public static final String API_STUDENT_KEY = "9271c345-03b4-40b3-80cc-c35d3f3ee874";
 
     private static final int GUARDIAN_LOADER_ID = 1;
     private NewsInfoAdapter mAdapter;
@@ -32,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
      * TextView that is displayed when the list is empty
      */
     private TextView mEmptyStateTextView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("section", sectionSelection);
         uriBuilder.appendQueryParameter("order by", orderBy);
-        uriBuilder.appendQueryParameter("api-key", "test");
+        uriBuilder.appendQueryParameter("api-key", API_STUDENT_KEY);
         // Create a new loader for the given URL
         return new NewsInfoLoader(this, uriBuilder.toString());
     }
